@@ -39,54 +39,67 @@ body{
    
 }
 
+
+
 .container {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
    min-width: 100%;
   height: 100vh;
-   
+  
+ 
+}
+
+.header-and-img {
+   margin-top: 50px;
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+   justify-content: space-between;
+   width: 100%;
+   max-width: 600px;
+   height: 100px;
+
 }
 
 .todo-header {
    color: #fff;
    font-size: 40px;
    letter-spacing: 10px;
-   position: absolute;
    left: 420px;
    top: 40px;
 }
 
 .moon-img {
-   position: absolute;
+   
    right: 400px;
    height: 60px;
-   top: 60px;
+   width: 60px;
    cursor: pointer;
 
 }
 
 .sun-img {
-    position: absolute;
+    
     right: 400px;
-    height: 50px;
-    top: 60px;
+    height: 60px;
+    width: 60px;
     display: none;
     cursor: pointer;
 }
 
-/*  .todo-input  input{
-   position: absolute;
-   left: 425px;
-   height: 50px;
-   width: 450px;
-}  */
-
-.todo-input img {
-   position:relative;
-   height: 20px;
-   left: 430px;
-   top: 187px;
+.todo-input {
+   display: flex;
+   justify-content: center;
+   margin-top: 40px;
+   width: 600px;
+   height: auto;
 }
-/* .todo-input */ input {
-   position: absolute;
+
+   
+ .todo-input input {
    left: 425px;
    top: 170px;
    width: 450px;
@@ -95,7 +108,7 @@ body{
    border:none;
    outline: none;
    font-size: 20px;
-   text-indent: 35px;
+   text-indent: 25px;
    background: var(--todo-input-color);
    color:var(--font-color-input) ;
   
@@ -106,10 +119,9 @@ body{
  }
 
 .todo-list {
-   content:"";
-   position:relative;
-   top: 230px;
-   left: 425px;
+   display: flex;
+   flex-direction: column;
+   margin-top: 50px;
    border-radius: 5px;
    background-color: var(--todo-background);
    width: 450px ;
@@ -135,6 +147,44 @@ body{
    position: relative;
    display: inline-block;
 }
+
+
+.filter {
+   display: flex;
+   justify-content: space-around;
+   
+   align-items: center;
+   width: 450px;
+   min-height: 65px;
+   box-shadow: 0 0 1px  var(--todo-box-shadow);
+   font-size: 15px;
+
+}
+
+.show-items{
+   display: flex;
+   justify-content: space-evenly;
+   width: 200px;
+
+}
+
+button {
+   display: flex;
+   border: hidden;
+   cursor: pointer;
+   background-color: #fff;
+   background: transparent;
+   color: var(--font-color);
+}
+
+button:hover{
+   color:#0074D9 ;
+}
+
+.filter span:hover {
+   cursor: pointer;;
+}
+
 
 ul li [type = "checkbox"] {
    position: absolute;
@@ -175,7 +225,7 @@ ul li input[type="checkbox"]~.checkmark:hover::before {
    width: 25;
    height: 25px;
    border-radius: 50px;
-   background: var(--todo-background);
+    background:  var(--todo-background) ;  
    display: block;
 }
 
@@ -183,6 +233,13 @@ ul li input[type="checkbox"]:checked ~ .checkmark{
    background: center url(images/rsz_check.png), no-repeat linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   
 }
+
+ul li input[type="checkbox"]:checked ~ .checkmark:hover::before {
+   background: center url(images/rsz_check.png), no-repeat linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+   
+  
+   
+} 
 
 ul li input[type="checkbox"]:checked ~ .txt {
    text-decoration: line-through;
@@ -205,39 +262,28 @@ ul li:hover .remove {
    
 }
 
-@media only screen and (min-width:1440px) {
-   .todo-input input {
-      left: 40vw;
+
+@media only screen and (max-width:650px) {
+   .header-and-img {
+      flex-direction: column-reverse;
+      
    }
 
-   .moon-img, .sun-img{
-      right: 30vw;
-   }
-
-   .todo-header{
-      left: 30vw;
+   .todo-input {
+      width: 350px;
    }
 
    .todo-list {
-      left: 40vw;
+      width: 350px;
+   }
+
+   .filter {
+      width: 350px;
+   }
+
+   .white-theme {
+      background-color: #8784F6;
    }
 }
-
-@media only screen and (max-width:900px) {
- .todo-header{
-    top: 1vw;
-    left: 10vw;
- }
-
- .moon-img, .sun-img {
-    top: 3vw;
-    right: 7vw;
- }
-
- 
-   
-}
-
-
 
 

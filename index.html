@@ -16,34 +16,39 @@
 </head>
 <body class="white-theme">
   <div class="container">
+    <div class="header-and-img">
     <h1 id="header" class="todo-header">TODO</h1>
-   <img src="images/night.png" id="theme-changer-moon" alt="moon" class="moon-img">
-     <img src="images/sun.png" id="theme-changer-sun" alt="moon" class="sun-img">
+    <img src="images/night.png" id="theme-changer-moon" alt="moon" class="moon-img">
+    <img src="images/sun.png" id="theme-changer-sun" alt="moon" class="sun-img">
+  </div>
+  
     <div class="todo-input">
        <input type="text"  placeholder="enter your todo..">
-       <img src="images/oval.png" alt="oval">
+    </div>
+   
+    <div class="todo-list">
+      <ul></ul>
+      <div class="filter">
+       <span id="items-left" class="counter"></span>
+        <div class="show-items">
+          <button type="button" id="show-all">
+            All
+            <span class="counter"></span>
+          </button>
+          <button type="button" id="show-active">
+            Active
+            <span class="counter"></span>
+          </button>
+          <button type="button" id="show-completed">
+            Completed 
+            <span class="counter"></span>
+          </button>
+        </div>
+          <button type="button" id="clear-completed">Clear completed</button>
+      
+      </div>
     </div>
 
-    <div class="todo-list">
-      <ul>
-        <li>
-          <label class="list-container">
-          <input type="checkbox">
-          <span class="txt">Groceries</span>
-          <span class="checkmark"></span>
-          </label>
-            <span class="remove" id="remove"></span>
-        </li>
-        <li>
-          <label class="list-container">
-          <input type="checkbox">
-          <span class="txt">Work</span>
-          <span class="checkmark"></span>
-          </label>
-          <span class="remove"></span>
-        </li>
-      </ul>
-    </div>
   </div>
   
   
