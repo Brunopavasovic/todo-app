@@ -14,8 +14,8 @@ const arr =
   //{ content: 'Groceries', done: false, id: 'b3a678e10e078' },
   //{ content: 'Groceries', done: false, id: 'b3a678e10e078' },
 ];
-
-const uniqueId = Math.random().toString(16).slice(2);
+window.arr = arr;
+const uniqueId = () => Math.random().toString(16).slice(2);
 
 changeBgToDark.addEventListener("click", () => {
   document.querySelector('body').classList = [changeBgToDark.click ? 'dark-theme' : 'white-theme'];
@@ -38,10 +38,12 @@ input.addEventListener('keypress', (e) => {
 });
 
 const createTodo = (txt) => {
+  const id = uniqueId();
+  let done = false;
   let elem = document.createElement('li');
   elem.innerHTML = `
     <label class="list-container">
-      <input type="checkbox" class="checkbox-done">
+      <input type="checkbox" class="checkbox-done" value="${id}">
       <span class="txt">${txt}</span>
       <span class="checkmark"></span>
     </label>
@@ -52,8 +54,19 @@ const createTodo = (txt) => {
   showNum();
   filterItemsOnChange();
 
+   /*document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
+    if(checkbox.checked) {
+      done = true;
+    } else {
+      done = false;
+    }
+  })*/
+  
+
  arr.push({
-    content: txt , done: '' ,  id: '1'
+  id,
+  content: txt,
+  done
  });
   
 }
@@ -88,11 +101,20 @@ const showNum = () => {
 
 }
 
+// proci kroz sve checkboxove i naci vrijednost done
+
+const toggleDone = (ev) => {
+  let id = ev.target.value;
+  let done = ev.target.checked;
+  console.log('Toggle done: ', { id, done });
+};
+
 // dodaj evt listnr na chbox -change
 
 const filterItemsOnChange = () => {
   document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
     checkbox.addEventListener('change', showNum);
+    checkbox.addEventListener('change', toggleDone);
   })
 };
 
@@ -111,9 +133,6 @@ const showActive = () => {
   document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
     const item = checkbox.closest('li');
     item.style.display = checkbox.checked ? 'none' : 'block';
-
-
-
 
   }
   )
