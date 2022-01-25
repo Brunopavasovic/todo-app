@@ -9,6 +9,7 @@ let showAllTodos = document.getElementById('show-all');
 let showActiveTodods = document.getElementById('show-active');
 let clearCompletedTodos = document.getElementById('clear-completed');
 
+
 let arr =
 [
   //{ content: 'Groceries', done: false, id: 'b3a678e10e078' },
@@ -37,7 +38,14 @@ input.addEventListener('keypress', (e) => {
   }
 });
 
-const createTodo = (txt) => {
+const showTodosLocal = () => {
+  const arrJson = JSON.stringify(arr);
+  window.localStorage.setItem("testJson" ,arrJson);
+}
+
+// https://thecodingpie.medium.com/how-to-build-a-todo-list-app-with-javascript-and-local-storage-a884f4ea3ec
+
+const renderTodos = () => {
   const id = uniqueId();
   let elem = document.createElement('li');
   elem.innerHTML = `
@@ -54,11 +62,32 @@ const createTodo = (txt) => {
   filterItemsOnChange();
 
 
+}
+
+
+const createTodo = (txt) => {
+ /*  const id = uniqueId();
+  let elem = document.createElement('li');
+  elem.innerHTML = `
+    <label class="list-container">
+      <input type="checkbox" class="checkbox-done" value="${id}">
+      <span class="txt">${txt}</span>
+      <span class="checkmark"></span>
+    </label>
+    <button class="remove"></button>
+  `;
+  
+  ul.append(elem);
+  showNum();
+  filterItemsOnChange(); */
+
+
  arr.push({
   id,
   content: txt,
   done : false
  });
+ showTodosLocal();
  console.log(arr);
  
   
@@ -72,6 +101,7 @@ const deleteTodo = (elem) => {
 
   elem.remove();
   showNum();
+  showTodosLocal();
 }
 
 
@@ -105,6 +135,7 @@ const toggleDone = (ev) => {
   let obj = arr.find(o => o.id === id);
       console.log(obj);
   obj.done = done;
+  showTodosLocal();
   
 };
 
@@ -113,11 +144,6 @@ const clearArray = () => {
  console.log(arr);
 }
 
-const delArray = () => {
-  document.querySelector('li')
-}
-
-// dodaj evt listnr na chbox -change
 
 const filterItemsOnChange = () => {
   document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
