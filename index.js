@@ -39,6 +39,12 @@ input.addEventListener("keypress", (e) => {
   }
 });
 
+const saveTodos = () => {
+  const localJson = JSON.stringify(arr);
+  window.localStorage.setItem("showArr", localJson);
+  console.log(arr);
+};
+
 const createTodo = (txt) => {
   const id = uniqueId();
   let elem = document.createElement("li");
@@ -60,7 +66,7 @@ const createTodo = (txt) => {
     content: txt,
     done: false,
   });
-  console.log(arr);
+  saveTodos();
 };
 
 const deleteTodo = (elem) => {
@@ -71,6 +77,7 @@ const deleteTodo = (elem) => {
 
   elem.remove();
   showNum();
+  saveTodos();
 };
 
 ul.addEventListener("click", (event) => {
@@ -94,6 +101,7 @@ const showNum = () => {
   document.querySelector(
     "#show-active .counter"
   ).innerText = `(${notChecked.length})`;
+  saveTodos();
 };
 
 // proci kroz sve checkboxove i naci vrijednost done
@@ -103,15 +111,12 @@ const toggleDone = (ev) => {
   let obj = arr.find((o) => o.id === id);
   console.log(obj);
   obj.done = done;
+  saveTodos();
 };
 
 const clearArray = () => {
   arr = arr.filter((item) => !item.done);
   console.log(arr);
-};
-
-const delArray = () => {
-  document.querySelector("li");
 };
 
 // dodaj evt listnr na chbox -change
@@ -162,7 +167,8 @@ showAllTodos.addEventListener("click", showAll);
 showActiveTodods.addEventListener("click", showActive);
 clearCompletedTodos.addEventListener("click", clearCompleted);
 
-createTodo("Groceries");
-createTodo("Work");
+//createTodo("Groceries");
+//createTodo("Work");
 showNum();
 filterItemsOnChange();
+//saveTodos();
