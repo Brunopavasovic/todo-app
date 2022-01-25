@@ -9,7 +9,7 @@ let showAllTodos = document.getElementById('show-all');
 let showActiveTodods = document.getElementById('show-active');
 let clearCompletedTodos = document.getElementById('clear-completed');
 
-const arr =
+let arr =
 [
   //{ content: 'Groceries', done: false, id: 'b3a678e10e078' },
   //{ content: 'Groceries', done: false, id: 'b3a678e10e078' },
@@ -39,7 +39,6 @@ input.addEventListener('keypress', (e) => {
 
 const createTodo = (txt) => {
   const id = uniqueId();
-  let done = false;
   let elem = document.createElement('li');
   elem.innerHTML = `
     <label class="list-container">
@@ -47,34 +46,30 @@ const createTodo = (txt) => {
       <span class="txt">${txt}</span>
       <span class="checkmark"></span>
     </label>
-    <span class="remove"></span>
+    <button class="remove"></button>
   `;
   
   ul.append(elem);
   showNum();
   filterItemsOnChange();
 
-   /*document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
-    if(checkbox.checked) {
-      done = true;
-    } else {
-      done = false;
-    }
-  })*/
-  
 
  arr.push({
   id,
   content: txt,
-  done
+  done : false
  });
+ console.log(arr);
+ 
   
 }
 
-
-
-
 const deleteTodo = (elem) => {
+  let id = elem.querySelector('.checkbox-done').value;
+  arr = arr.filter(item => item.id !== id);
+  
+  console.log('Deleting li: ', elem, id, arr);
+
   elem.remove();
   showNum();
 }
@@ -84,7 +79,9 @@ const deleteTodo = (elem) => {
 ul.addEventListener('click', (event) => {
   if (event.target.classList.contains('remove')) {
     deleteTodo(event.target.parentElement);
-    showNum();
+   
+   /*  delArr(); */
+    
 
   }
 })
@@ -101,13 +98,24 @@ const showNum = () => {
 
 }
 
-// proci kroz sve checkboxove i naci vrijednost done
+// proci kroz sve checkboxove i naci vrijednost done 
 
 const toggleDone = (ev) => {
-  let id = ev.target.value;
-  let done = ev.target.checked;
-  console.log('Toggle done: ', { id, done });
+  const { value: id, checked: done } = ev.target;
+  let obj = arr.find(o => o.id === id);
+      console.log(obj);
+  obj.done = done;
+  
 };
+
+const clearArray = () => {
+ arr = arr.filter(item => !item.done);
+ console.log(arr);
+}
+
+const delArray = () => {
+  document.querySelector('li')
+}
 
 // dodaj evt listnr na chbox -change
 
@@ -115,6 +123,7 @@ const filterItemsOnChange = () => {
   document.querySelectorAll('.checkbox-done').forEach((checkbox) => {
     checkbox.addEventListener('change', showNum);
     checkbox.addEventListener('change', toggleDone);
+   
   })
 };
 
@@ -153,6 +162,7 @@ const clearCompleted = () => {
     if (checkbox.checked) {
       deleteTodo(item);
       showNum();
+      clearArray()
     }
     else {
       item.style.display = 'block';
@@ -160,10 +170,15 @@ const clearCompleted = () => {
   })
 }
 
+
+
+
+
 showCompletedEl.addEventListener('click', showCompleted);
 showAllTodos.addEventListener('click', showAll);
 showActiveTodods.addEventListener('click', showActive);
 clearCompletedTodos.addEventListener('click', clearCompleted);
+
 
 
 
