@@ -44,13 +44,31 @@ const saveTodos = () => {
   window.localStorage.setItem("showArr", localJson);
   console.log(arr);
 };
+// da prikaze u storageu
+const renderTodo = () => {
+  const id = uniqueId();
+  let elem = document.createElement("li");
+  elem.innerHTML = `
+    <label class="list-container">
+      <input type="checkbox" class="checkbox-done" value="${id}">
+      <span class="txt">${txt}</span>
+      <span class="checkmark"></span>
+    </label>
+    <button class="remove"></button>
+  `;
+
+  ul.append(elem);
+  showNum();
+  filterItemsOnChange();
+  let obj = {};
+};
 
 const createTodo = (txt) => {
   const id = uniqueId();
   let elem = document.createElement("li");
   elem.innerHTML = `
     <label class="list-container">
-      <input type="checkbox" class="checkbox-done" value="${id}">
+      <input type="checkbox" class="checkbox-done" value="${id}">  
       <span class="txt">${txt}</span>
       <span class="checkmark"></span>
     </label>
