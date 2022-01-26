@@ -60,7 +60,7 @@ const createTodo = (txt) => {
   const todo = {
     id,
     content: txt,
-    done: false,
+    done: false
   };
   arr.push(todo);
   renderTodo(todo);
@@ -70,19 +70,19 @@ const createTodo = (txt) => {
 };
 
 const renderTodo = (todo) => {
-  const checkedProp = todo.done ? "checked" : "";
-
+  const saveCheck = todo.done ? "checked" : "";
   li = document.createElement("li");
   li.innerHTML = `
         <label class="list-container">
-          <input type="checkbox" class="checkbox-done" value="${todo.id} "${checkedProp} >
+          <input type="checkbox" class="checkbox-done" value="${todo.id}"${saveCheck}>
           <span class="txt">${todo.content}</span>
           <span class="checkmark"></span>
         </label>
         <button class="remove"></button>
-      `;
+      `; 
 
   ul.append(li);
+
 };
 
 const deleteTodo = (elem) => {
